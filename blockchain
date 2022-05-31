@@ -1,0 +1,214 @@
+https://bitcoin.org/zh_CN/bitcoin-paper
+https://ethereum.org/zh/whitepaper/
+
+其实去中心化存储跟区块链的关联并没有那么密切，区块链在其中的主要作用是作为存储层之上的一种激励计费机制。
+
+btc 和eth的区别 
+btc 更多考虑稳定, 区块小, 出快慢, 不奖励叔块 , 发币固定, eth contract 图灵完备
+
+
+
+hash 
+正向快速 反响困难 输入敏感 避免碰撞
+
+eos 出快快 牺牲中心化
+
+以太坊 组成
+p2p
+transaction
+evm
+blockchain
+client
+
+eth 一开始空头了很多
+eth每年发型不能超过7200w的25% 无限发币
+主要目的
+main pusrpose of eth is contract as gas
+
+uncle reward 就是打包好了 但是晚了 孤块 btc 会完全干掉这些块  但是eth还是会给出奖励  7/8
+uncle refering reward
+ghost eth 发币的协议
+
+btc 一个块12.5
+eth 一个块 5 eth 出块速度快
+现在是多少
+etherscan
+hashrate 全网算力
+contract internal transaction 
+
+block 结构
+height
+Timestamp
+hash
+transactions
+uncle
+size 
+diffculty
+gas
+nonce
+reward 静态奖励 加交易费
+extra
+以太坊没有限制固定的区块大小
+
+ghost协议 greedy heaviest observed subtree
+
+btc 更多的考虑安全性 处快速度慢, 区块容量小
+
+
+先挖出来的挖下一个会更有优势 因为他是最早知道出块的节点,btc设计成10分钟, 就是为了稀释传播时间
+eth就是有算力的会越来越有优势
+为了防止这种情况 使用 幽灵协议
+
+btc是最长主链
+最重主链 包括所有的子树 不只看长度
+
+when calc the proof  of work , we regard the gregre father as root and calc the whole weight family
+
+
+dapp 去中心化应用
+dapp 只能合约+ 沟通的前端 
+
+
+
+ecr20 指标
+total supply 总共发行量
+合约:
+erc20token tx
+
+
+geth go-ethereum  客户端
+
+eth.getBaalance()
+web3.fromWei()
+eth.getblockNumber()
+personal.newAccount()
+eth.accounts()
+eth.sendTransaction(from:, to:,value)
+personal.unlock()
+password:
+
+miner 对象
+miner.start(1)
+eth.coinbase 是啥
+
+homestead eth版本 位置
+
+geth --rpc mask 钱包就能访问了
+
+dev 自动有一条私链 有一个超级账号自动发交易 等到有交易的时候才去挖
+eth.get 回车
+json.rpc
+
+系统的整个状态是uxto的集合, 用户的balance 是用户私钥的utxo的组合
+找所有的utxo
+eth 万物皆交易 定义特殊的数据结构 交易里面可以是代码 可以包含内部的存储
+
+如果接受账户有相关代码, 代码会自动运行 内部存储可以被更改
+
+utxo 更高的隐私程度
+更高的可扩展性
+
+1. 可表达的状态少 。
+UTXO 只能是已花费或者未花费状态，这就没有给需要任何其它内部状态的多阶段合约或者脚本留出生存空间，这也意味着 UTXO 只能用于建立简单的、一次性的合约，UTXO 更像是一种二进制控制位。 simple one-time contract
+
+2. 区块链盲点（Blockchain-blindness）。
+UTXO 的脚本只能看到自己这条历史轨迹，无法看到区块链的数据的全貌，这导致了功能性扩展受到了限制，我们在花费比特币的过程中需要小心翼翼的组合 UTXO，这也导致了系统状态逻辑复杂，不适合设计成智能合约的基础结构。
+3. 价值盲点（Value-blindness）。
+UTXO 脚本不能提供非常精细的金额控制，基于账户模型的余额在花费过程中，可以任意的按值存取，它仅取决于程序能表示的最小精度。
+
+便于维护持久轻节点 
+utxo 的状态转变复杂, 对于轻节点压力大
+
+
+账户
+externaly owen account 外部账户 EOA 用户账户 人来控制的
+contract account 合约账户
+
+- 余额
+- 可发送交易 ( 转币 或者触发合约代码)
+- 用户私钥控制
+- 没有关联代码
+
+
+所有交易的发起者都是外部账户
+合约
+- 余额
+- 有关联代码
+- 由代码控制
+- 可通过交易或者其他合约调用来触发代码执行
+- 执行代码的时候可以操作自己的存储空间 可以调用其他合约
+
+普通账户可以发起交易去调用合约 通过transaction 去交互
+
+message 
+- 合约和合约的通信方式
+- 不会被序列化的虚拟对象, 只存与evm
+- 可以看作函数调用
+    - 消息发送方
+    - 消息接收方 
+    - values
+    - data
+    - gas
+
+
+合约:
+可以读写自己的内部存储
+可以向其他合约发布消息
+一旦合约执行结束 evm就会终止运行
+
+分布式存储
+发币
+多重签名合约
+
+以太坊是一个全局单例的状态机 交易是可以唯一改变他的东西
+合约不是自己运行的
+Vitalik Buterin :
+后悔叫只能合约
+应该叫一个听起来很程序员化的东西
+
+
+交易vrs 签名 递归长度前缀
+
+
+nonce
+确认交易顺序
+防止双花
+撤销pending中的交易
+确定生成的合约地址
+
+估计自己的gas
+estimateGas 算法
+
+
+tx结构:
+只有value 没有data -> 转账
+只有data没有value -> 调用函数的时候  合约调用
+两个都有 发给合约的交易带钱
+两个都没有 -> 浪费gas 
+
+
+创建合约 发送到一个交易到0地址
+转账到0地址 销毁以太
+
+evm里面的代码都是隔离的 完全无法访问网络 文件系统 进程
+
+牺牲了效率 增加了很多redundant 为的是去中心化`
+外部账户和内部账户 公用同一个地址空间  ,对于evm 没有任何区别
+
+storage
+key value
+每个账户都有持久化的存储空间成为storage 永久存储在区块链中 永久保存合约变量 读写的gas 开销也最大
+
+memory 
+每一次消息调用就会有一块内存
+
+
+stack evm 不是基于寄存器的 而是基于栈的
+
+投票合约
+
+
+[0x7465737400000000000000000000000000000000000000000000000000000000,
+0x7565737400000000000000000000000000000000000000000000000000000000,
+0x7565737400000000000000000000000000000000000000000000000000000000
+]

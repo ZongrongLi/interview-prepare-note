@@ -1,0 +1,63 @@
+单私有子网
+共有子网和私有子网混合的
+私有子网有一个gateway 才能访问公网 有一个统一的出口 访问外网的转发器, 
+共有子网有个ip就可以直接访问外网
+
+
+gateway 后面就是依托具体的实例, 做了高可用的可以配置, 需要有一个公网ip的,理解成再public 公有子网的实例
+私有子网的流量同意通过net gateway 转发到外网
+如何区分私有子网和公有子网
+路由表 通过
+
+
+私有路由表的target 是个一个netgateway nat-06a
+public  路由表的destination 是个igw的东西
+
+线上会在一个vpc下面创建很多private subnet
+共有子网的势力的ip就是自己的ip 私有子网就是netgateway
+
+
+ingress 向外提供访问地址
+service 是服务发现的东西
+
+eks:
+
+
+入网的流量走的nginx , nginx下面会接route53 , roiute53 指向一个lb lb 背后接了loadbalanceer 用来转发到不同的az下面
+
+
+ingress lua nginx 实现
+转发熔断,限流,鉴权
+
+kong 配置文件host 如果匹配了host 就会指向一个backend标签
+
+
+使用cluster ip 地址连接 不需要跳过安全验证
+
+有一点想舍弃istio 
+istio vertualservice
+超时熔断限流, 三个地方
+
+argo cd 通过沟通gitlab项目 帮你把一些k8s资源同步到k8s集群里面
+蓝绿 灰度
+比如说 80%暂停3s , 可以写更多的东西 遇到错误是不是要回滚,发布100流量的话是不是需要一些手动的操作
+
+实际上再整个task 希望能够通过统一的工具 通过一个简单的配置就能整个同步上去
+
+
+
+
+现在的集群都提供了那些功能:
+logging with fluent-bit :
+container 回想std出入日志, 这些日志会被docker的log手机 会写道本机的磁盘上面, 每个机器会磁盘上会tail所有的日志,原先会跳过pulsar打到es上,但是有的时候会写的比较猛,跑的container特别多的花es就可能受不了,fluentbit可能会重试,重试的次数多了会oom ,一下就全完了,pulsar es search in rust  插件想 pulsar 里面取发, 往里面写 往es里面写 ,kinana 就能看到日志了
+
+提供了一个log的sdk  ,做日志输出, 输出称josn格式
+
+
+
+
+terraform 做资源 基础设施即服务 iaas ,对资源做版本管理 解决复杂设施的配置问题
+变更放到git可以被review
+统一配置统一资源修改
+write plan apply
+

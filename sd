@@ -1,0 +1,24 @@
+SQL or no SQL
+
+SQL tables create a strict data template, so it’s difficult to make mistakes.
+NoSQL is more flexible and forgiving, but being able to store any data anywhere can lead to consistency issues.
+functionality such as triggers and stored procedures.
+so complex bussiness is not suitbale in NoSQL
+
+
+Your data schema must be designed and implemented before any business, the change of schema waste too much , but large changes can be complicated.
+scale of the  foreiner case in this reason
+
+
+A NoSQL database may be more suited to projects where the initial data requirements are difficult to ascertain. 
+the 
+
+
+Rapid ingest of clickstream and log data
+Leaderboard or scoring data
+Temporary data, such as a shopping cart
+Frequently accessed ('hot') tables
+Metadata/lookup tables
+
+
+Relational JOIN
